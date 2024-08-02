@@ -1,3 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
+import { PublicRoutes } from "./routes/public/PublicRoutes";
+import { AppThemeProvider } from "./shared/contexts/ThemeContext";
+
 export const App = () => {
-	return <h1>Ola Mundo</h1>;
+	return (
+		<AppThemeProvider>
+			<BrowserRouter>
+				<PublicRoutes />
+			</BrowserRouter>
+		</AppThemeProvider>
+	);
 };
