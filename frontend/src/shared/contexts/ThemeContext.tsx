@@ -1,24 +1,20 @@
-import { APIOptions, PrimeReactProvider } from "primereact/api";
+import { ThemeProvider } from "@emotion/react";
+import { Box } from "@mui/material";
 import {
 	ReactNode,
 	createContext,
+	useCallback,
 	useContext,
 	useState,
-	useCallback,
 } from "react";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-
-interface IThemeContext {
+interface IThemeContextParams {
 	themeName: "light" | "dark";
 	toggleTheme: () => void;
 }
 
-const AppThemeContext = createContext<IThemeContext>({} as IThemeContext);
-
-const themeOptions: Partial<APIOptions> = {
-	ripple: true,
-	inputStyle: "outlined",
-};
+const AppThemeContext = createContext<IThemeContextParams>(
+	{} as IThemeContextParams
+);
 
 export const useAppThemeContext = () => {
 	return useContext(AppThemeContext);
@@ -34,8 +30,16 @@ export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
 	}, []);
 
 	return (
-		<AppThemeContext.Provider value={{ themeName, toggleTheme }}>
-			<PrimeReactProvider value={themeOptions}>{children}</PrimeReactProvider>
+		<AppThemeContext.Provider
+			value={{ themeName, toggleTheme } as IThemeContextParams}
+		>
+			<ThemeProvider theme={{}}>
+				<Box
+				//bgcolor={theme.palette.background.default}
+				>
+					{children}
+				</Box>
+			</ThemeProvider>
 		</AppThemeContext.Provider>
 	);
 };
