@@ -1,5 +1,13 @@
-import { Header } from "../../shared/components";
+import { SideBar } from "../../shared/components";
 
 export const Home = () => {
-	return <Header></Header>;
+    return (
+        <>
+            <SideBar />
+            <main>
+                <label htmlFor="salario">Sálario:</label>
+                <input type="text" name="salario" />
+            </main>
+        </>
+    );
 };
